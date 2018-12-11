@@ -1,0 +1,13 @@
+char StringConcatenate(char a, char b){
+	int size = strlen(a) + strlen(b) + 1;
+	char rest = (char)malloc(size);
+	for(int i = 0; i < strlen(a); ++i)
+		rest[i] = a[i];
+
+	for(int i = 0; i < strlen(b); i++)
+		rest[strlen(a) + i] = b[i];
+
+	rest[strlen(a) + strlen(b)] = 0;
+
+	return rest;
+}
