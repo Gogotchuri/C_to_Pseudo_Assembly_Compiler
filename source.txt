@@ -4,7 +4,7 @@ char StringConcatenate(char a, char b){
 	for(int i = 0; i < strlen(a); ++i)
 		rest[i] = a[i];
 
-	for(int i = 0; i < strlen(b); i++)
+	for( int i = 0; i < strlen(b); i++)
 		rest[strlen(a) + i] = b[i];
 
 	rest[strlen(a) + strlen(b)] = 0;
