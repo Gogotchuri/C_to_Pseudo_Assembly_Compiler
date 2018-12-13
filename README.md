@@ -9,5 +9,5 @@ Detailed description of project and class documantations will be added soon;
 
 Program should work following way: 
 1)Tokenizer Slices given code file into tokens and assigns each token a type;
-2)Parser uses tokenizer and Grammar rules to check code and build AST(abstract syntax tee)
+2)Parser uses tokenizer and Grammar rules to check code and build AST(abstract syntax tree)
 3)Generator takes AST and generates Pseudo Assemly code from it
