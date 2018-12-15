@@ -195,7 +195,7 @@ static void EvaluateNonIdentifier(char * token, tokenizer * t){
     int tok_len = strlen(token);
     if(tok_len == 0) return;
 
-    char one_sized[2], type_buff[64], *first_part, *number_part, *last_part;
+    char check_buffer[3], type_buff[64], *first_part, *number_part, *last_part;
     vector * vec = &(t->token_to_type);
 
     /*Base case: Token is already a type*/
@@ -234,11 +234,24 @@ static void EvaluateNonIdentifier(char * token, tokenizer * t){
         return;
     }
 
-    for(int i = 0; i < tok_len; i++){
-        one_sized[0] = token[i];
-        one_sized[1] = '\0';
-        GetTokenType(one_sized, type_buff, &(t->typesMap));
-        InsertInTokenType(one_sized, type_buff, vec);
+    for(int i = 0; i < tok_len - 1; i++){
+        check_buffer[0] = token[i];
+        check_buffer[1] = token[i+1];
+        check_buffer[2] = '\0';
+        if(GetTokenType(check_buffer, type_buff, &(t->typesMap))){
+            InsertInTokenType(check_buffer, type_buff, vec);
+            i++;
+        }else{
+            check_buffer[1] = '\0';
+            GetTokenType(check_buffer, type_buff, &(t->typesMap));
+            InsertInTokenType(check_buffer, type_buff, vec);
+        }
+        if(i == tok_len - 2){
+            check_buffer[0] = token[tok_len-1];
+            check_buffer[1] = '\0';
+            GetTokenType(check_buffer, type_buff, &(t->typesMap));
+            InsertInTokenType(check_buffer, type_buff, vec);
+        }
     }
 
     
